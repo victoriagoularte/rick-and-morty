@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_message">Something went wrong</string>
+    <string name="loading">Loading..</string>
+    <string name="back">Voltar</string>
+    <string name="characters">Personagens</string>
+    <string name="filter">Filtro</string>
+    <string name="name">Nome</string>
+    <string name="to_filter">Filtrar</string>
+</resources>
