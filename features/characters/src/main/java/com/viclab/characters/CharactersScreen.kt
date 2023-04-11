@@ -96,6 +96,7 @@ private fun CharacterList(
             onActionClick = onFilterClick
         )
         LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
             contentPadding = PaddingValues(horizontal = 8.dp),
             modifier = modifier
                 .wrapContentHeight()
@@ -110,9 +111,6 @@ private fun CharacterList(
                             it.image
                         )
                     )
-                }
-                if (index != characterState.itemCount) {
-                    Divider(color = MaterialTheme.colorScheme.onSurface, thickness = 1.dp)
                 }
             }
 

@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            RickNMortyTheme {
+            RickNMortyTheme() {
                 RnmApp()
             }
         }
