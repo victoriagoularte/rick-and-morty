@@ -124,7 +124,7 @@ private fun CharacterList(
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = stringResource(id = R.string.error_message),
+                                text = stringResource(id = R.string.completed_list),
                                 color = MaterialTheme.colorScheme.error
                             )
                         }
@@ -177,7 +177,7 @@ private fun CharacterList(
                             verticalArrangement = Arrangement.Center,
                         ) {
                             Text(
-                                text = stringResource(id = R.string.error_message),
+                                text = stringResource(id = R.string.loading),
                             )
                             CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
                         }
