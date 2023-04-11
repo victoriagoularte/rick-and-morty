@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -44,12 +43,13 @@ internal fun CharactersRoute(
     viewModel: CharactersViewModel = hiltViewModel(),
     modifier: Modifier = Modifier,
 ) {
-    viewModel.characters()
 
+    viewModel.characters()
     val charactersState = viewModel.uiState.collectAsLazyPagingItems()
+
     CharactersScreen(
         charactersState,
-        onFiltered = { name, status -> viewModel.characters(name, status?.name) },
+        onFiltered = { name, status -> viewModel.reload(name, status?.name.orEmpty()) },
         modifier = modifier
     )
 }

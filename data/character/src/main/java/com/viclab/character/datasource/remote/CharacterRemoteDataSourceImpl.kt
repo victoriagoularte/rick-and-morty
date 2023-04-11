@@ -7,5 +7,5 @@ class CharacterRemoteDataSourceImpl @Inject constructor(
     private val service: CharacterService
 ) : CharacterRemoteDataSource {
 
-    override suspend fun characters(page: Int) = service.characters(page)
+    override suspend fun characters(name: String?, status: String?, page: Int) = service.characters(name, status, page)
 }

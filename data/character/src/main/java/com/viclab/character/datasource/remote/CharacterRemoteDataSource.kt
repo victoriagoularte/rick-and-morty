@@ -4,5 +4,5 @@ import com.viclab.character.model.CharacterListResponse
 
 interface CharacterRemoteDataSource {
 
-    suspend fun characters(page: Int) : CharacterListResponse
+    suspend fun characters(name: String?, status: String?, page: Int) : CharacterListResponse
 }

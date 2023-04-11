@@ -24,10 +24,8 @@ interface CharacterDao {
     @Query(
         value = """
             SELECT * FROM character 
-            WHERE name LIKE '%' || :name || '%' 
-            AND (:status IS NULL OR status = :status)
     """
     )
-    fun getCharacterList(name: String, status: String?): PagingSource<Int, CharacterEntity>
+    fun getCharacterList(): PagingSource<Int, CharacterEntity>
 
 }

@@ -21,9 +21,12 @@ private const val SOURCE_DURATION = 1L
 
 @OptIn(ExperimentalPagingApi::class)
 class PageCharacterRemoteMediator @Inject constructor(
-    val remoteDataSource: CharacterRemoteDataSource,
+    private val remoteDataSource: CharacterRemoteDataSource,
     private val database: RickNMortyDatabase,
 ): RemoteMediator<Int, CharacterEntity>() {
+
+    var name = ""
+    var status = ""
 
     override suspend fun initialize(): InitializeAction {
         val cacheTimeout = TimeUnit.MILLISECONDS.convert(SOURCE_DURATION, TimeUnit.MINUTES)
@@ -81,7 +84,7 @@ class PageCharacterRemoteMediator @Inject constructor(
         }
 
         try {
-            val apiResponse = remoteDataSource.characters(page)
+            val apiResponse = remoteDataSource.characters(name, status, page)
 //            delay(1000L)
             val characters = apiResponse.characterList
             val endOfPaginationReached = characters.isEmpty()
