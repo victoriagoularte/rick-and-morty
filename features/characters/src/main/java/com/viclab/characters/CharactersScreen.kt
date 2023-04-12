@@ -64,7 +64,7 @@ internal fun CharactersRoute(
 
     CharactersScreen(
         charactersState,
-        onFiltered = { name, status -> viewModel.reload(name, status?.name.orEmpty()) },
+        onFiltered = { name, status -> viewModel.reload(name, status.orEmpty()) },
         modifier = modifier
     )
 }
@@ -73,7 +73,7 @@ internal fun CharactersRoute(
 @Composable
 internal fun CharactersScreen(
     characterState: LazyPagingItems<Character>,
-    onFiltered: (String, FilterStatus?) -> Unit,
+    onFiltered: (String, String?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var shouldShowFilter by rememberSaveable { mutableStateOf(false) }

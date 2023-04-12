@@ -16,8 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,14 +31,14 @@ fun AvatarCard(
     modifier: Modifier = Modifier
 ) {
     Surface(
+        modifier = modifier,
         shape = MaterialTheme.shapes.small,
-        modifier = modifier
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .fillMaxWidth()
                 .padding(16.dp)
+                .fillMaxWidth()
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
@@ -67,10 +65,11 @@ fun AvatarCard(
             )
         }
     }
+
 }
 
-@Preview(name = "DarkMode", uiMode = Configuration.UI_MODE_NIGHT_YES, widthDp = 360, heightDp = 640)
-@Preview(widthDp = 360, heightDp = 640)
+@Preview(name = "DarkMode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
 @Composable
 private fun PreviewAvatarCard() {
     RickNMortyTheme {

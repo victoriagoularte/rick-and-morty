@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            RickNMortyTheme() {
+            RickNMortyTheme {
                 RnmApp()
             }
         }
@@ -37,8 +37,7 @@ fun DefaultPreview() {
     RickNMortyTheme {
         val navController = rememberNavController()
         Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
+            modifier = Modifier.fillMaxSize()
         ) {
             RnmNavHost(
                 navController = navController,
