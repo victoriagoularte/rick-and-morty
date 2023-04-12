@@ -1,5 +1,19 @@
 package com.viclab.characters
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideIn
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.with
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,6 +37,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -54,6 +69,7 @@ internal fun CharactersRoute(
     )
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 internal fun CharactersScreen(
     characterState: LazyPagingItems<Character>,
@@ -62,19 +78,32 @@ internal fun CharactersScreen(
 ) {
     var shouldShowFilter by rememberSaveable { mutableStateOf(false) }
 
-    if(shouldShowFilter) {
-        FilterCharacterScreen(
-            modifier,
-            onFiltered,
-            onBackPressed = { shouldShowFilter = false },
-            onFilterClicked = { shouldShowFilter = false }
-        )
-    } else {
-        CharacterList(
-            modifier,
-            characterState,
-            onFilterClick = { shouldShowFilter = true }
-        )
+    AnimatedContent(
+        targetState = shouldShowFilter,
+        transitionSpec = {
+            if (targetState) {
+                slideInHorizontally { width -> width } with
+                        slideOutHorizontally { width -> -width }
+            } else {
+                slideInHorizontally { width -> -width } with
+                        slideOutHorizontally { width -> width }
+            }
+        }
+    ) { isFilterScreenVisible ->
+        if (isFilterScreenVisible) {
+            FilterCharacterScreen(
+                modifier,
+                onFiltered,
+                onBackPressed = { shouldShowFilter = false },
+                onFilterClicked = { shouldShowFilter = false }
+            )
+        } else {
+            CharacterList(
+                modifier,
+                characterState,
+                onFilterClick = { shouldShowFilter = true }
+            )
+        }
     }
 }
 
